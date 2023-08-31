@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+
+{% block main %}
+<body>
+    <div>
+        {% if recipes %}
+        <h2> Results for "{{ search_query }}"</h2>
+        <ul>
+            {%  for recipe in recipes %}
+            <li>
+                <h3 class="recipe-title"> {{ recipe.title }}</h3>
+                {% if recipe.image %}
+                <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                {% endif %}
+                <a href="{{ url_for('view_recipe', recipe_id=recipe.id, search_query=search_query)}}"> View </a>
+            </li>
+            {% endfor %}
+        </ul>
+        <!--If no recipe found-->
+        {% else %}
+        <p> No recipes found. </p>
+        {% endif %}
+    </div>
+    
+</body>
+{% endblock %}

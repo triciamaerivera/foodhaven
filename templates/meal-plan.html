@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weekly Meal Plan</title>
+</head>
+<body>
+    <h1>Weekly Meal Plan</h1>
+    
+    <form method="POST">
+        <label for="calories">Preferred Calories:</label>
+        <input type="number" id="calories" name="calories" value="{{ preferred_calories }}" required>
+        <button type="submit">Generate Meal Plan</button>
+    </form>
+    
+    {% if meal_plan %}
+    <table>
+        <tr>
+            <th>Meal Type</th>
+            <th>Recipe</th>
+            <th>Image</th>
+        </tr>
+        {% for meal_type, recipe in meal_plan.items() %}
+        <tr>
+            <td>{{ meal_type }}</td>
+            <td><a href="{{ url_for('view_recipe', recipe_id=recipe.id, search_query=recipe.title) }}">{{ recipe.title }}</a></td>
+            <td><img src="{{ recipe.image }}" alt="{{ recipe.title }}" width="150"></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
+
+
+
